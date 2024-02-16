@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>TODO App</title>
-</head>
-<body>
-<ul>
-    {% for d in data %}
-    <li>{{d.description}}</li>
-    {% endfor %}
-</ul>
+  </head>
+  <body>
+    <form method="post" action="/todos/create">
+      <input type="text" name="description" />
+      <input type="submit" value="Create" />
+    </form>
 
-</body>
+    <ul>
+      {% for d in data %}
+      <li>{{d.description}}</li>
+      {% endfor %}
+    </ul>
+  </body>
 </html>
