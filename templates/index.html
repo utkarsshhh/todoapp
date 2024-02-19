@@ -20,7 +20,8 @@
       <li>{{d.description}}</li>
       {% endfor %}
     </ul>
-    <div class = "hidden" id = "error" style="display:none;"> Something went wrong! </div>
+    <div class = "hidden" id = "error"> Something went wrong! </div>
+    <!-- <div>Something Went wrong</div> -->
     <script>
         document.getElementById('form',onsubmit = function(e) {
             e.preventDefault();
@@ -32,9 +33,11 @@
                 }
             })
             .then(function(response){
+                
                 return response.json();
             })
             .then(function(jsonresponse){
+                
                 console.log(jsonresponse);
                 const liItem = document.createElement('LI');
                 liItem.innerHTML = jsonresponse['description']
