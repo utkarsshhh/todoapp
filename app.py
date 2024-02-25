@@ -59,11 +59,11 @@ def set_completed(todo_id):
         db.session.close()
     return redirect(url_for('index'))
 
-@app.route('/todos/delete-todo',methods = ['POST'])
-def delete_todo():
+@app.route('/todos/<delete_id>/delete-todo',methods = ['DELETE'])
+def delete_todo(delete_id):
     error = False
     try:
-        delete_id = request.get_json()['id']
+        # delete_id = request.get_json()['id']
         Todo.query.filter_by(id=delete_id).delete()
         db.session.commit()
     except Exception as e:
@@ -76,7 +76,7 @@ def delete_todo():
     if error:
         abort(400)
     else:
-        return '200'
+        return redirect(url_for('index'))
 
 
 
