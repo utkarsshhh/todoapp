@@ -24,8 +24,16 @@
       <input type="submit" value="Create" />
     </form>
 
+    <ul id = 'lists'>
+        {% for d in data['lists'] %}
+        <li>
+            {{d.name}}
+        </li>
+        {% endfor %}
+    </ul>
+
     <ul id="todos">
-      {% for d in data %}
+      {% for d in data['todos'] %}
       <li>
         <input
           class="check-completed"
