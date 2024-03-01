@@ -93,10 +93,13 @@ def delete_todo(delete_id):
         return redirect(url_for('index'))
 
 
+@app.route('/todolist/<list_id>')
+def get_list(list_id):
+    return render_template('index.html',data = Todo.query.filter_by(list_id=list_id).order_by(Todo.id).all())
 
 @app.route('/')
 def index():
-    return render_template('index.html',data = Todo.query.order_by(Todo.id).all())
+    return redirect(url_for('get_list',list_id = 1))
 
 if __name__ == '__main__':
     app.run(debug=True)
