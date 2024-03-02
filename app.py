@@ -95,8 +95,22 @@ def delete_todo(delete_id):
 
 @app.route('/todolist/<list_id>')
 def get_list(list_id):
-    return render_template('index.html',data = {"list_id":list_id,"lists": TodoList.query.all(),"todos":  Todo.query.filter_by(list_id=list_id).order_by(Todo.id).all()})
-
+    # lists = [list_obj.serialize() for list_obj in TodoList.query.all()]
+    lists = [{"id": list_obj.id, "name": list_obj.name} for list_obj in TodoList.query.all()]
+    # todos = [todo_obj.serialize() for todo_obj in Todo.query.filter_by(list_id=list_id).order_by(Todo.id).all()]
+    todos = []
+    for todo_obj in Todo.query.filter_by(list_id=list_id).order_by(Todo.id).all():
+        todo_dict = {
+            "id": todo_obj.id,
+            "completed": todo_obj.completed,
+            "description": todo_obj.description,
+            "list_id":todo_obj.list_id
+            # Add more attributes as needed
+        }
+        todos.append(todo_dict)
+    # return render_template('index.html',data = {"list_id":list_id,"lists": TodoList.query.all(),"todos":  Todo.query.filter_by(list_id=list_id).order_by(Todo.id).all()})
+    return render_template('index.html', data={"list_id": list_id, "lists": lists,
+                                               "todos":todos})
 @app.route('/')
 def index():
     return redirect(url_for('get_list',list_id = 1))
