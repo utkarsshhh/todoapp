@@ -97,7 +97,6 @@ def delete_todo(delete_id):
 def get_list(list_id):
     # lists = [list_obj.serialize() for list_obj in TodoList.query.all()]
     lists = [{"id": list_obj.id, "name": list_obj.name} for list_obj in TodoList.query.all()]
-    # todos = [todo_obj.serialize() for todo_obj in Todo.query.filter_by(list_id=list_id).order_by(Todo.id).all()]
     todos = []
     for todo_obj in Todo.query.filter_by(list_id=list_id).order_by(Todo.id).all():
         todo_dict = {
@@ -108,7 +107,7 @@ def get_list(list_id):
             # Add more attributes as needed
         }
         todos.append(todo_dict)
-    # return render_template('index.html',data = {"list_id":list_id,"lists": TodoList.query.all(),"todos":  Todo.query.filter_by(list_id=list_id).order_by(Todo.id).all()})
+
     return render_template('index.html', data={"list_id": list_id, "lists": lists,
                                                "todos":todos})
 @app.route('/')

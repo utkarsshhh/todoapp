@@ -69,8 +69,8 @@
       console.log(listNames)
       for(let i =0;i<listNames.length;i++){
         const listName = listNames[i]
-        console.log(listName.id)
-        if (listName.id==list_id){
+        console.log("listname ",listName.dataset)
+        if (listName.dataset.id==list_id){
             listName.className = "list-name highlight"
         }
         else{
