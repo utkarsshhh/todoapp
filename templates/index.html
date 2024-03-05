@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <style>
         .highlight{
             background-color: grey;
@@ -53,12 +55,13 @@
           %}
         />
         {{d.description}}
-        <button class="delete" data-id="{{d.id}}">Delete</button>
+        <button class="delete btn-danger" data-id="{{d.id}}">Delete</button>
       </li>
       {% endfor %}
     </ul>
     <div class="hidden" id="error">Something went wrong!</div>
     <!-- <div>Something Went wrong</div> -->
+    <script src = '../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
     <script>
       var data = {{ data | tojson | safe }};
       console.log(data)
