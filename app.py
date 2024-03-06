@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, jsonify, abort, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS
+# from flask_cors import CORS
 from flask_migrate import Migrate
 import sys
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:utk%40123@localhost:5432/todoapp'
