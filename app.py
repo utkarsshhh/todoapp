@@ -5,7 +5,7 @@ from flask_migrate import Migrate
 import sys
 
 app = Flask(__name__)
-# CORS(app)
+CORS(app)
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:utk%40123@localhost:5432/todoapp'
