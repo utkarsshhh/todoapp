@@ -5,10 +5,10 @@
     <meta name="description" content="" >
     <meta name="author" content="" >
     <meta name="viewport" content="width=device-width,initial-scale=1" >
-    <link
+    <!-- <link
       type="text/css"
       rel="stylesheet" href="/static/css/bootstrap.min.css"
-    />
+    /> -->
     <style>
       .highlight {
         background-color: grey;
@@ -64,7 +64,7 @@
     </ul>
     <div class="hidden" id="error">Something went wrong!</div>
     <!-- <div>Something Went wrong</div> -->
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script> -->
     <script>
       var data = {{ data | tojson | safe }};
       console.log(data)
@@ -122,6 +122,8 @@
 
       document.getElementById("form").onsubmit = function (e) {
         e.preventDefault();
+        const queryString = window.location.pathname
+        console.log("query string ",queryString)
         fetch("/todos/create", {
           method: "POST",
           body: JSON.stringify({

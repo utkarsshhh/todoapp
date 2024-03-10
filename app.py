@@ -5,7 +5,7 @@ from flask_migrate import Migrate
 import sys
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:utk%40123@localhost:5432/todoapp'
@@ -43,7 +43,7 @@ def create_todo():
     body = {}
     try:
         description = request.get_json()['description']
-        todo = Todo(description=description,completed = False)
+        todo = Todo(description=description,list_id = 1,completed = False)
         db.session.add(todo)
         db.session.commit()
         body['description'] = todo.description
