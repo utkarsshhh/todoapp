@@ -36,6 +36,7 @@ class Todo(db.Model):
 # with app.app_context():
 #     db.create_all()
 
+
 @app.route('/todos/create',methods = ['POST'])
 def create_todo():
 
@@ -59,6 +60,7 @@ def create_todo():
     if (not error):
         return jsonify(body)
 
+
 @app.route('/todos/<todo_id>/set-completed',methods = ['POST'])
 def set_completed(todo_id):
     try:
@@ -73,6 +75,7 @@ def set_completed(todo_id):
     finally:
         db.session.close()
     return redirect(url_for('index'))
+
 
 @app.route('/todos/<delete_id>/delete-todo',methods = ['DELETE'])
 def delete_todo(delete_id):
@@ -111,6 +114,8 @@ def get_list(list_id):
 
     return render_template('index.html', data={"list_id": list_id, "lists": lists,
                                                "todos":todos})
+
+
 @app.route('/')
 def index():
     return redirect(url_for('get_list',list_id = 1))

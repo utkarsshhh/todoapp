@@ -35,11 +35,11 @@
       <input type="submit" value="Create" />
     </form>
 
-    <ul id="lists">
+    <div id="lists">
       {% for d in data['lists'] %}
-      <li class="list-name" data-id="{{d.id}}">{{d.name}}</li>
+      <button class="list-name" data-id="{{d.id}}">{{d.name}}</button>
       {% endfor %}
-    </ul>
+    </div>
 
     <ul id="todos">
       {% for d in data['todos'] %}
