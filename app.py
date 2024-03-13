@@ -14,7 +14,7 @@ migrate = Migrate(app, db)
 
 class TodoList(db.Model):
     __tablename__ = 'todolists'
-    id = db.Column(db.Integer,primary_key = True)
+    id = db.Column(db.Integer,primary_key = True,autoincrement = True)
     name = db.Column(db.String(),nullable= False)
     todos = db.relationship('Todo',backref = 'list',lazy = True)
 
@@ -36,6 +36,26 @@ class Todo(db.Model):
 # with app.app_context():
 #     db.create_all()
 
+@app.route('/todos/create_list',methods= ['POST'])
+def create_list():
+    error = False
+    body = {}
+    try:
+        list_name = request.get_json()['list_name']
+        list = TodoList(name = list_name)
+        db.session.add(list)
+        db.session.commit()
+        body['list_name'] = list.list_name
+    except:
+        db.session.rollback()
+        error = True
+        print (sys.exc_info())
+    finally:
+        db.session.close()
+    if (error):
+        abort(400)
+    else:
+        return jsonify(body)
 
 @app.route('/todos/create',methods = ['POST'])
 def create_todo():
@@ -114,6 +134,7 @@ def get_list(list_id):
 
     return render_template('index.html', data={"list_id": list_id, "lists": lists,
                                                "todos":todos})
+
 
 
 @app.route('/')

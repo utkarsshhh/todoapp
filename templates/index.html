@@ -30,6 +30,12 @@
     <title>TODO App</title>
   </head>
   <body>
+
+    <form id = 'listform'>
+      <input type = 'text' id = 'list_name' name = 'list_name' />
+      <input type = 'submit' value = 'Create List' />
+    </form>
+    <br>
     <form id="form">
       <input type="text" id="description" name="description" />
       <input type="submit" value="Create" />
@@ -72,7 +78,7 @@
       const checkboxes = document.querySelectorAll(".check-completed");
       const buttons = document.querySelectorAll(".delete");
       const listNames = document.querySelectorAll(".list-name")
-      console.log(listNames)
+      console.log("listnames  ",listNames)
       for(let i =0;i<listNames.length;i++){
         const listName = listNames[i]
         console.log("listname ",listName.dataset)
@@ -119,6 +125,34 @@
             });
         };
       }
+
+      document.getElementById("listform").onsubmit = function (e) {
+        e.preventDefault();
+        fetch("/todos/create_list", {
+          method: "POST",
+          body:JSON.stringify({
+            list_name:document.getElementById("list_name").value,
+          }),
+          headers:{
+            "Content-Type": "application/json",
+          }
+        })
+        .then(function (response){
+          return response.json()
+        })
+        .then(function (jsonResponse){
+          const bItem = document.createElement("BUTTON");
+          bItem.innerHTML = jsonResponse['list_name']
+          document.getElementById("lists").appendChild(bItem);
+          document.getElementById("error").className = "hidden";
+
+        })
+        .catch(function () {
+            document.getElementById("error").className = "";
+          });
+
+      }
+
 
       document.getElementById("form").onsubmit = function (e) {
         e.preventDefault();
