@@ -45,7 +45,7 @@ def create_list():
         list = TodoList(name = list_name)
         db.session.add(list)
         db.session.commit()
-        body['list_name'] = list.list_name
+        body['list_name'] = list.name
     except:
         db.session.rollback()
         error = True
