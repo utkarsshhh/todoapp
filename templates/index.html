@@ -10,12 +10,19 @@
       rel="stylesheet" href="/static/css/bootstrap.min.css"
     /> -->
     <style>
+      .delete-list{
+        margin-left: 0.6%;
+        margin-right: 3%;
+      }
       .highlight {
         background-color: grey;
       }
 
       .hidden {
         display: none;
+      }
+      .list-name{
+        padding:0.7%
       }
       ul {
         list-style: none;
@@ -44,6 +51,7 @@
     <div id="lists">
       {% for d in data['lists'] %}
       <button class="list-name" data-id="{{d.id}}">{{d.name}}</button>
+      <button class = 'delete-list'>Delete</button>
       {% endfor %}
     </div>
 
