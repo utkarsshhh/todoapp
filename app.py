@@ -36,6 +36,11 @@ class Todo(db.Model):
 # with app.app_context():
 #     db.create_all()
 
+
+@app.route('todos/delete_list/<list_id>',methods = ['DELETE'])
+def delete_list(list_id):
+
+
 @app.route('/todos/create_list',methods= ['POST'])
 def create_list():
     error = False
