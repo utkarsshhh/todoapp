@@ -39,6 +39,8 @@ class Todo(db.Model):
 
 @app.route('todos/delete_list/<list_id>',methods = ['DELETE'])
 def delete_list(list_id):
+    error = False
+
 
 
 
