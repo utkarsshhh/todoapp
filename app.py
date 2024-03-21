@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, jsonify, abort, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS
+# from flask_cors import CORS
 from flask_migrate import Migrate
 import sys
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:utk%40123@localhost:5432/todoapp'
@@ -37,11 +37,17 @@ class Todo(db.Model):
 #     db.create_all()
 
 
-@app.route('todos/delete_list/<list_id>',methods = ['DELETE'])
+@app.route('/todos/delete_list/<list_id>',methods = ['DELETE'])
 def delete_list(list_id):
-    error = False
-
-
+    try:
+        TodoList.query.filter_by(id = list_id).delete()
+        Todo.query.filter_by(list_id=list_id).all().delete()
+        db.session.commit()
+    except:
+        db.session.rollback()
+        abort(400)
+    finally:
+        return '200'
 
 
 @app.route('/todos/create_list',methods= ['POST'])
