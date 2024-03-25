@@ -40,7 +40,7 @@ class Todo(db.Model):
 @app.route('/todos/delete_list/<list_id>',methods = ['DELETE'])
 def delete_list(list_id):
     try:
-        TodoList.query.filter_by(id = list_id).delete()
+        TodoList.query.filter_by(id = list_id).all().delete()
         Todo.query.filter_by(list_id=list_id).all().delete()
         db.session.commit()
     except:
